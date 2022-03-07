@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+	html,body,#map{width:100%;height:100%;padding:0;margin:0}
+	</style>
+	<title>Metro Warszawskie</title>
+	<meta charset="UTF-8">
+   	<link rel="icon" type="image/ico" href="ikonka.ico"/>
+</head>
+
+<body>
+	<div id="map"></div>
+	<link rel="stylesheet" href="leaflet/leaflet.css"> <!--podłączenie pliku css z biblioteki-->
+
+	<script src = "leaflet/leaflet.js"></script> <!--podłączenie pliku js(JavaScript) z biblioteki-->
+	<script src = "leaflet.browser.print-master/src/leaflet.browser.print.js"></script>
+	<script src = "leaflet.browser.print-master/src/leaflet.browser.print.sizes.js"></script>
+	<script src = "leaflet.browser.print-master/src/leaflet.browser.print.utils.js"></script>
+
+<!--dalszy kod to tworzenie mapy w JS-->
+<script>
+	<!--zmienna, konstruktro i wywołanie mapy-->
+	var mymap =L.map('map',{maxZoom:20}).setView([52.23,21.01],14)
+	<!--warstwa wykorzystujaca usluge TMS-->
+	var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar', attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});
+	<!--zmienna nalezy dodac do mapy-->
+	osm.addTo(mymap)
+	
+	
+	// Satelite Layer
+	googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{ 
+    maxZoom: 20, 
+    subdomains:['mt0','mt1','mt2','mt3'] 
+	}); 
+	googleSat.addTo(mymap); 
+
+
+
+/* 	<!--znaczniki i okienka-->
+	var popup = L.popup().setLatLng([52.02,20.19]).setContent("Samotny popup w centrum mapy").openOn(mymap);
+	var marker = L.marker([52.01,20.19]).addTo(mymap);
+	<!--metoda dodająca do znacznika wyskakujące okienko i zawartosc tego okienka-->
+	marker.bindPopup("Popup przypiety do markera")
+	<!--metoda dodająca etykietę do znacznika-->
+	marker.bindTooltip("<b>Marker</b>").openTooltip(); */
+	
+<!--geoJSON-->
+var linia_M1 = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M1": "Młociny"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.929856300354004,
+          52.290763844380265
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M1": "Wawrzyszew"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.939640998840332,
+          52.286274975242264
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M1": "Słodowiec"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.960240364074707,
+          52.27681010883562
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M1": "Marymont"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.971720218658447,
+          52.2716370529722
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M1": "Plac Wilsona"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.98440170288086,
+          52.26923413387347
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M1": "Dworzec Gdański"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.99433660507202,
+          52.257861176283896
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M1": "Ratusz Arsenał"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.001160144805908,
+          52.2449612907539
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M1": "Świętokrzyska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.007940769195557,
+          52.23508022700524
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M1": "Centrum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.010043621063232,
+          52.23113769935561
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M1": "Politechnika"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.01534366607666,
+          52.218440381182354
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M1": "Pole Mokotowskie"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.007747650146484,
+          52.20852711485775
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M1": "Racławicka"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.012167930603027,
+          52.19894043417667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M1": "Wierzbno"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.01663112640381,
+          52.18990417958079
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M1": "Wilanowska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.023132801055908,
+          52.18168182816946
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M1": "Służew"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.026287078857422,
+          52.172773661618635
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M1": "Ursynów"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.02761745452881,
+          52.16202095784736
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M1": "Stokłosy"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.034719944000244,
+          52.15605781252088
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M1": "Imielin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.04609251022339,
+          52.14926438225275
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M1": "Natolin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.05643510818481,
+          52.14108719333822
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M1": "Kabaty"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.065082550048828,
+          52.13206552502041
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M1": "Stare Bielany"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.949361324310303,
+          52.28181190593774
+        ]
+      }
+    }
+  ]
+}
+
+var linia_M2 = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M2": "Księcia Janusza"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.942366123199463,
+          52.23933776357783
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M2": "Młynów"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.960540771484375,
+          52.2376295417898
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M2": "Płocka"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.966076850891113,
+          52.23306958165603
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M2": "Rondo Daszyńskiego"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.982835292816162,
+          52.230020586193795
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M2": "Rondo ONZ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.998177528381348,
+          52.23310900695003
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M2": "Świętokrzyska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.00789785385132,
+          52.23508679759237
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M2": "Nowy Świat - Uniwersytet"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.016786694526672,
+          52.236827968902304
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M2": "Centrum Nauki Kopernik"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.031780242919922,
+          52.239909346187424
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M2": "Stadion Narodowy"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.042873859405514,
+          52.24696482859237
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M2": "Dworzec Wileński"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.035503149032593,
+          52.254052028105875
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M2": "Szwedzka"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.04409694671631,
+          52.26291928505711
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M2": "Targówek Mieszkalny"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.051035821437836,
+          52.269408120094695
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stacja_M2": "Trocka"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.05582892894745,
+          52.2755267483695
+        ]
+      }
+    }
+  ]
+}
+	
+	var points_M1 = L.geoJSON(linia_M1,{
+            onEachFeature: oEF,
+            pointToLayer: PToL    
+        }).addTo(mymap)
+		
+	var points_M2 = L.geoJSON(linia_M2,{
+            onEachFeature: oEF2,
+            pointToLayer: PToL    
+        }).addTo(mymap)
+	
+	function PToL(feature, latlng)
+	{
+		style = {radius:4,opacity:1,color: 'rgba(0,0,0,1.0)', weight: 0.5, fill: true, fillOpacity:1 ,fillColor: 'black'}
+		return L.circleMarker(latlng,style);
+	}
+		
+	function oEF(feature, layer)
+	{
+		var props = feature.properties;
+		layer.bindTooltip(props.stacja_M1,
+		{permanent: true,});
+	}
+	
+	function oEF2(feature, layer)
+	{
+		var props = feature.properties;
+		layer.bindTooltip(props.stacja_M2,
+		{permanent: true});
+	}
+	
+//legenda i podziałka mapy
+	L.control.scale().addTo(mymap);
+
+//wybieranie warstw mapy, wybor jednokroty i wielokrotny
+	var baseLayers = {
+	"Satellite": googleSat,
+    "OpenStreetMap": osm,
+	};
+
+	var overlays = {
+    "M1": points_M1,
+	"M2": points_M2,
+	};
+
+	L.control.layers(baseLayers, overlays).addTo(mymap);
+	
+	L.control.browserPrint().addTo(mymap)
+	
+	
+//edycja prefixu pola attribution
+	
+	mymap.attributionControl.setPrefix(
+	'<a href = "http://leafletjs.com"> Leaflet </a> | Mój pierwszy geoportal'
+	);
+	
+</script>
+
+</body>
+</html>
